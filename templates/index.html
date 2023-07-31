@@ -1,0 +1,53 @@
+from IPython.display import HTML
+
+html_content = """<!DOCTYPE html>
+<html>
+<head>
+    <title>Ranked Candidates</title>
+</head>
+<body>
+    <h1>Ranked Candidates</h1>
+    <form method="post">
+        <label for="sourceCode">Source Code:</label>
+        <select name="sourceCode" id="sourceCode">
+            {% for option in sourceCode_options %}
+            <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+        <label for="targetCode">Target Code:</label>
+        <select name="targetCode" id="targetCode">
+            {% for option in targetCode_options %}
+            <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+        <label for="SubTenant">SubTenant:</label>
+        <select name="SubTenant" id="SubTenant">
+            {% for option in SubTenant_options %}
+            <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filter">
+    </form>
+    <table border="1">
+        <tr>
+            <th>User ID</th>
+            <th>Quality Score</th>
+            <th>AWC Per Hour</th>
+            <th>Cost Per Word</th>
+            <th>SubTenant Tasks Completed</th>
+        </tr>
+        {% for candidate in ranked_candidates %}
+        <tr>
+            <td>{{ candidate["User ID"] }}</td>
+            <td>{{ candidate["Quality Score"] }}</td>
+            <td>{{ candidate["AWC Per Hour"] }}</td>
+            <td>{{ candidate["Cost Per Word"] }}</td>
+            <td>{{ candidate["User Completed Tasks"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+"""
+
+display(HTML(html_content))
